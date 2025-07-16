@@ -1,0 +1,41 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - trunk
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v4
+
+      - name: shitty openssl fix
+        run: |
+          cat > openssl.cnf <<EOF
+          openssl_conf = openssl_init
+
+          [openssl_init]
+          ssl_conf = ssl_sect
+
+          [ssl_sect]
+          system_default = crypto_policy
+
+          [crypto_policy]
+          CipherString = DEFAULT@SECLEVEL=1
+          EOF
+
+      - name: ftp upload
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          OPENSSL_CONF=./openssl.cnf curl -T \
+            internet-box.php ftp://ftpupload.net/htdocs/index.php \
+            --user "$FTP_USER:$FTP_PASS" \
+            --ftp-create-dirs \
+            --ftp-ssl \
+            --ssl-reqd
