@@ -42,7 +42,7 @@ if (
             $allowed_mimes = ['image/jpeg', 'image/png', 'image/gif'];
             if ($file['error'] === UPLOAD_ERR_OK && $valid && in_array($valid['mime'], $allowed_mimes)) {
                 // create image resource
-                switch ($info['mime']) {
+                switch ($valid['mime']) {
                     case 'image/jpeg':
                         $img = imagecreatefromjpeg($file['tmp_name']);
                         $ext = 'jpg';
