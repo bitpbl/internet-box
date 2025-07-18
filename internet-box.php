@@ -228,7 +228,7 @@ $images = $galleryStmt->fetchAll(PDO::FETCH_ASSOC);
             <img loading="lazy" fetchpriority="low" src="uploads/<?= htmlspecialchars($img['filename']) ?>" alt="an image">
             <p>uploaded at <?= htmlspecialchars($img['uploaded_at']) ?>
             <?php if ($img['expiration']): ?>
-                — expires <?= htmlspecialchars($img['expiration']) ?>
+                &mdash; expires <?= htmlspecialchars($img['expiration']) ?>
             <?php endif; ?></p>
         </div>
     <?php endforeach; ?>
