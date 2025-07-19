@@ -1,4 +1,5 @@
 # internet-box
+![internet box cleanup](https://cronitor.io/badges/ZnFCLH/production/SvBG9LwTUD3kCu2VWU5TQRm6DWg.svg)
 
 a tiny anonymous image host
 
